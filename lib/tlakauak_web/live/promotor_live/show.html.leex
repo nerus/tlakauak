@@ -1,0 +1,36 @@
+<h1>Mostrar Promotor</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TlakauakWeb.PromotorLive.FormComponent,
+    id: @promotor.id,
+    title: @page_title,
+    action: @live_action,
+    promotor: @promotor,
+    return_to: Routes.promotor_show_path(@socket, :show, @promotor) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Clave:</strong>
+    <%= @promotor.clave %>
+  </li>
+
+  <li>
+    <strong>Descripcion:</strong>
+    <%= @promotor.descripcion %>
+  </li>
+
+  <li>
+    <strong>Coordinador:</strong>
+    <%= @promotor.coordinador.descripcion %>
+  </li>
+  <li>
+    <strong>Inactivo:</strong>
+    <%= boolean_to_string(@promotor.inactivo) %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Editar", to: Routes.promotor_show_path(@socket, :edit, @promotor), class: "button" %></span>
+<span><%= live_redirect "Regresar", to: Routes.promotor_index_path(@socket, :index) %></span>

@@ -1,0 +1,38 @@
+<h1>Lista de Colonias</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, TlakauakWeb.ColoniaLive.FormComponent,
+    id: @colonia.id || :new,
+    title: @page_title,
+    action: @live_action,
+    colonia: @colonia,
+    return_to: Routes.colonia_index_path(@socket, :index) %>
+<% end %>
+<span><%= live_patch "Agregar Colonia", to: Routes.colonia_index_path(@socket, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clave</th>
+      <th>Descripcion</th>
+      <th>Inactivo?</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="colonias">
+    <%= for colonia <- @colonias do %>
+      <tr id="colonia-<%= colonia.id %>">
+        <td><%= colonia.clave %></td>
+        <td><%= colonia.descripcion %></td>
+        <td><%= boolean_to_string(colonia.inactivo) %></td>
+        <td>
+          <span><%= live_redirect "Mostrar", to: Routes.colonia_show_path(@socket, :show, colonia) %></span>
+          <span><%= live_patch "Editar", to: Routes.colonia_index_path(@socket, :edit, colonia) %></span>
+          <!-- <span><%= #link "Eliminar", to: "#", phx_click: "delete", phx_value_id: colonia.id, data: [confirm: "Are you sure?"] %></span> -->
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

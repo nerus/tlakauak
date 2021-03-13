@@ -1,0 +1,44 @@
+<h1>Lista de Promotores</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, TlakauakWeb.PromotorLive.FormComponent,
+    id: @promotor.id || :new,
+    title: @page_title,
+    action: @live_action,
+    promotor: @promotor,
+    return_to: Routes.promotor_index_path(@socket, :index) %>
+<% end %>
+<span><%= live_patch "Agregar Promotor", to: Routes.promotor_index_path(@socket, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>CLAVE</th>
+      <th>PROMOTOR</th>
+      <th>COORDINADOR</th>
+      <th>INACTIVO?</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="promotores">
+    <%= for promotor <- @promotores do %>
+      <tr id="promotor-<%= promotor.id %>">
+        <td><%= promotor.clave %></td>
+        <td><%= promotor.descripcion %></td>
+        <td>
+          <%= if promotor.coordinador do %>
+          <%= promotor.coordinador.descripcion %>
+          <% end %>
+        </td>
+        
+        <td><%= boolean_to_string(promotor.inactivo) %></td>
+        <td>
+          <span><%= live_redirect "Mostrar", to: Routes.promotor_show_path(@socket, :show, promotor) %></span>
+          <span><%= live_patch "Editar", to: Routes.promotor_index_path(@socket, :edit, promotor) %></span>
+          <!-- <span><%= # link "Eliminar", to: "#", phx_click: "delete", phx_value_id: promotor.id, data: [confirm: "¿ Está completamente seguro ?"] %></span> -->
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

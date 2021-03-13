@@ -1,0 +1,67 @@
+<h1>Mostrar Promovido</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TlakauakWeb.PromovidoLive.FormComponent,
+    id: @promovido.id,
+    title: @page_title,
+    action: @live_action,
+    promovido: @promovido,
+    return_to: Routes.promovido_show_path(@socket, :show, @promovido) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Clave:</strong>
+    <%= @promovido.clave %>
+  </li>
+
+  <li>
+    <strong>Descripcion:</strong>
+    <%= @promovido.descripcion %>
+  </li>
+
+  <li>
+    <strong>Direccion:</strong>
+    <%= @promovido.direccion %>
+  </li>
+
+  <li>
+    <strong>Telefono:</strong>
+    <%= @promovido.telefono %>
+  </li>
+
+  <li>
+    <strong>Seccional:</strong>
+    <%= @promovido.seccional %>
+  </li>
+
+  <li>
+    <strong>Coordinador:</strong>
+    <%= @promovido.coordinador_id %>
+  </li>
+
+  <li>
+    <strong>Promotor:</strong>
+    <%= @promovido.promotor_id %>
+  </li>
+
+  <li>
+    <strong>Colonia:</strong>
+    <%= @promovido.colonia_id %>
+  </li>
+
+  <li>
+    <strong>Localidad:</strong>
+    <%= @promovido.localidad_id %>
+  </li>
+
+  <li>
+    <strong>Inactivo:</strong>
+    <%= boolean_to_string(@promovido.inactivo) %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Editar", to: Routes.promovido_show_path(@socket, :edit, @promovido), class: "button" %></span>
+<span><%= live_redirect "Regresar", to: Routes.promovido_index_path(@socket, :index) %></span>

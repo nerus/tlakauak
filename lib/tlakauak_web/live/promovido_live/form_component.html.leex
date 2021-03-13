@@ -1,0 +1,66 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "promovido-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+<div>
+  <%= label f, "Clave Elector" %>
+  <%= text_input f, :clave %>
+  <%= error_tag f, :clave %>
+
+  <%= label f, "Nombre" %>
+  <%= text_input f, :descripcion %>
+  <%= error_tag f, :descripcion %>
+
+  <%= label f, :direccion %>
+  <%= text_input f, :direccion %>
+  <%= error_tag f, :direccion %>
+
+  <%= label f, "Localidad/Ciudad" %>
+  <%= if @promovido.localidad_id do %>
+  <%=  select(f, :localidad_id, Enum.map(@localidades, &{&1.descripcion, &1.id}), prompt: "Selecciona un localidad", selected: @promovido.localidad_id) %>
+  <% else %>
+  <%=  select(f, :localidad_id, Enum.map(@localidades, &{&1.descripcion, &1.id}), prompt: "Selecciona un localidad") %>
+  <% end %>
+  <%= error_tag f, :localidad_id %>
+
+  <%= label f, :colonia_id %>
+  <%= if @promovido.colonia_id do %>
+  <%=  select(f, :colonia_id, Enum.map(@colonias, &{&1.descripcion, &1.id}), prompt: "Selecciona un colonia", selected: @promovido.colonia_id) %>
+  <% else %>
+  <%=  select(f, :colonia_id, Enum.map(@colonias, &{&1.descripcion, &1.id}), prompt: "Selecciona un colonia") %>
+  <% end %>
+  <%= error_tag f, :colonia_id %>
+
+  <%= label f, :telefono %>
+  <%= text_input f, :telefono %>
+  <%= error_tag f, :telefono %>
+
+  <%= label f, :seccional %>
+  <%= text_input f, :seccional %>
+  <%= error_tag f, :seccional %>
+
+  <!-- <%= #label f, :coordinador_id %>
+  <%= #number_input f, :coordinador_id %>
+  <%= #error_tag f, :coordinador_id %> -->
+
+  <%= label f, :promotor_id %>
+  <%= if @promovido.promotor_id do %>
+  <%=  select(f, :promotor_id, Enum.map(@promotores, &{&1.descripcion, &1.id}), prompt: "Selecciona un promotor", selected: @promovido.promotor_id) %>
+  <% else %>
+  <%=  select(f, :promotor_id, Enum.map(@promotores, &{&1.descripcion, &1.id}), prompt: "Selecciona un promotor") %>
+  <% end %>
+  <%= error_tag f, :promotor_id %>
+
+
+
+  <%= label f, :inactivo %>
+  <%= checkbox f, :inactivo %>
+  <%= error_tag f, :inactivo %>
+</div>
+  
+
+  <%= submit "Guardar", phx_disable_with: "Guardando..." %>
+</form>

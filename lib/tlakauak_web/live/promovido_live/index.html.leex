@@ -1,0 +1,53 @@
+<h1>Lista de Promovidos</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, TlakauakWeb.PromovidoLive.FormComponent,
+    id: @promovido.id || :new,
+    title: @page_title,
+    action: @live_action,
+    promovido: @promovido,
+    return_to: Routes.promovido_index_path(@socket, :index) %>
+<% end %>
+<span><%= live_patch "Agregar Promovido", to: Routes.promovido_index_path(@socket, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clave</th>
+      <th>Descripcion</th>
+      <th>Direccion</th>
+      <th>Telefono</th>
+      <th>Seccional</th>
+      <!-- <th>Coordinador</th> -->
+      <th>Promotor</th>
+      <th>Colonia</th>
+      <th>Localidad</th>
+      <th>Inactivo</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="promovidos">
+    <%= for promovido <- @promovidos do %>
+      <tr id="promovido-<%= promovido.id %>">
+        <td><%= promovido.clave %></td>
+        <td><%= promovido.descripcion %></td>
+        <td><%= promovido.direccion %></td>
+        <td><%= promovido.telefono %></td>
+        <td><%= promovido.seccional %></td>
+        <!-- <td><%= #promovido.coordinador_id %></td> -->
+        <td><%= promovido.promotor.descripcion %></td>
+        <td><%= promovido.colonia.descripcion %></td>
+        <td><%= promovido.localidad.descripcion %></td>
+        <td><%= boolean_to_string(promovido.inactivo) %></td>
+
+        <td>
+          <span><%= live_redirect "Mostrar", to: Routes.promovido_show_path(@socket, :show, promovido) %></span>
+          <span><%= live_patch "Editar", to: Routes.promovido_index_path(@socket, :edit, promovido) %></span>
+          <!-- <span><%= #link "Delete", to: "#", phx_click: "delete", phx_value_id: promovido.id, data: [confirm: "Are you sure?"] %></span> -->
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,32 @@
+<h1>Mostrar Colonia</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TlakauakWeb.ColoniaLive.FormComponent,
+    id: @colonia.id,
+    title: @page_title,
+    action: @live_action,
+    colonia: @colonia,
+    return_to: Routes.colonia_show_path(@socket, :show, @colonia) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Clave:</strong>
+    <%= @colonia.clave %>
+  </li>
+
+  <li>
+    <strong>Descripcion:</strong>
+    <%= @colonia.descripcion %>
+  </li>
+
+  <li>
+    <strong>Inactivo:</strong>
+    <%= boolean_to_string(@colonia.inactivo) %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Editar", to: Routes.colonia_show_path(@socket, :edit, @colonia), class: "button" %></span>
+<span><%= live_redirect "Regresar", to: Routes.colonia_index_path(@socket, :index) %></span>

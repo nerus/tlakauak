@@ -1,0 +1,31 @@
+<h1>Show Coordinador</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TlakauakWeb.CoordinadorLive.FormComponent,
+    id: @coordinador.id,
+    title: @page_title,
+    action: @live_action,
+    coordinador: @coordinador,
+    return_to: Routes.coordinador_show_path(@socket, :show, @coordinador) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Clave:</strong>
+    <%= @coordinador.clave %>
+  </li>
+
+  <li>
+    <strong>Descripcion:</strong>
+    <%= @coordinador.descripcion %>
+  </li>
+  <li>
+    <strong>Inactivo:</strong>
+    <%= boolean_to_string(@coordinador.inactivo) %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Editar", to: Routes.coordinador_show_path(@socket, :edit, @coordinador), class: "button" %></span>
+<span><%= live_redirect "Regresar", to: Routes.coordinador_index_path(@socket, :index) %></span>

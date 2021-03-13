@@ -1,0 +1,39 @@
+<h1>Lista de Localidades</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, TlakauakWeb.LocalidadLive.FormComponent,
+    id: @localidad.id || :new,
+    title: @page_title,
+    action: @live_action,
+    localidad: @localidad,
+    return_to: Routes.localidad_index_path(@socket, :index) %>
+<% end %>
+<span><%= live_patch "Agregar Localidad", to: Routes.localidad_index_path(@socket, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clave</th>
+      <th>Descripcion</th>
+      <th>Inactivo ?</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="localidades">
+    <%= for localidad <- @localidades do %>
+      <tr id="localidad-<%= localidad.id %>">
+        <td><%= localidad.clave %></td>
+        <td><%= localidad.descripcion %></td>
+        <td><%= boolean_to_string(localidad.inactivo) %></td>
+
+        <td>
+          <span><%= live_redirect "Mostrar", to: Routes.localidad_show_path(@socket, :show, localidad) %></span>
+          <span><%= live_patch "Editar", to: Routes.localidad_index_path(@socket, :edit, localidad) %></span>
+          <!-- <span><%= #link "Delete", to: "#", phx_click: "delete", phx_value_id: localidad.id, data: [confirm: "Are you sure?"] %></span> -->
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

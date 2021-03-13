@@ -1,0 +1,37 @@
+<h1>Lista de Coordinadores</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, TlakauakWeb.CoordinadorLive.FormComponent,
+    id: @coordinador.id || :new,
+    title: @page_title,
+    action: @live_action,
+    coordinador: @coordinador,
+    return_to: Routes.coordinador_index_path(@socket, :index) %>
+<% end %>
+<span><%= live_patch "Agregar Coordinador", to: Routes.coordinador_index_path(@socket, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clave</th>
+      <th>Descripcion</th>
+      <th>INACTIVO ?</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="coordinadores">
+    <%= for coordinador <- @coordinadores do %>
+      <tr id="coordinador-<%= coordinador.id %>">
+        <td><%= coordinador.clave %></td>
+        <td><%= coordinador.descripcion %></td>
+        <td><%= boolean_to_string(coordinador.inactivo) %></td>
+        <td>
+          <span><%= live_redirect "Mostrar", to: Routes.coordinador_show_path(@socket, :show, coordinador) %></span>
+          <span><%= live_patch "Editar", to: Routes.coordinador_index_path(@socket, :edit, coordinador) %></span>
+          <!-- <span><%= #link "Eliminar", to: "#", phx_click: "delete", phx_value_id: coordinador.id, data: [confirm: "¿Está usted seguro de eliminar el registro?"] %></span> -->
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

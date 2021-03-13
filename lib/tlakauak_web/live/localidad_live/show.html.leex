@@ -1,0 +1,32 @@
+<h1>Mostrar Localidad</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TlakauakWeb.LocalidadLive.FormComponent,
+    id: @localidad.id,
+    title: @page_title,
+    action: @live_action,
+    localidad: @localidad,
+    return_to: Routes.localidad_show_path(@socket, :show, @localidad) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Clave:</strong>
+    <%= @localidad.clave %>
+  </li>
+
+  <li>
+    <strong>Descripcion:</strong>
+    <%= @localidad.descripcion %>
+  </li>
+
+  <li>
+    <strong>Inactivo:</strong>
+    <%= boolean_to_string(@localidad.inactivo) %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Editar", to: Routes.localidad_show_path(@socket, :edit, @localidad), class: "button" %></span>
+<span><%= live_redirect "Regresar", to: Routes.localidad_index_path(@socket, :index) %></span>
