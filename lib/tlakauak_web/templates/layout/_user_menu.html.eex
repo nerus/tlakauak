@@ -1,10 +1,10 @@
-<ul>
+<ul class="dropdown-menu" aria-labelledby="dropdown01">
 <%= if @current_user do %>
   <li><%= @current_user.email %></li>
-  <li><%= link "Perfil", to: Routes.user_settings_path(@conn, :edit) %></li>
-  <li><%= link "Cerrar", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+  <li><%= link "Perfil", to: Routes.user_settings_path(@conn, :edit), class: "dropdown-item"  %></li>
+  <li><%= link "Cerrar", to: Routes.user_session_path(@conn, :delete), class: "dropdown-item", method: :delete %></li>
 <% else %>
-  <li><%= link "Registrar", to: Routes.user_registration_path(@conn, :new) %></li>
-  <li><%= link "Iniciar", to: Routes.user_session_path(@conn, :new) %></li>
+  <li><%= link "Registrar", to: Routes.user_registration_path(@conn, :new), class: "dropdown-item" %></li>
+  <li><%= link "Iniciar", to: Routes.user_session_path(@conn, :new), class: "dropdown-item" %></li>
 <% end %>
 </ul>

@@ -42,6 +42,5 @@ defmodule TlakauakWeb.PromovidoLive.Index do
 
   defp list_promovidos do
     AbmPadron.list_promovidos()
-    |> IO.inspect(label: "list_promovidos")
   end
 end

@@ -1,4 +1,3 @@
-<h1>Lista de Promotores</h1>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, TlakauakWeb.PromotorLive.FormComponent,
@@ -8,9 +7,11 @@
     promotor: @promotor,
     return_to: Routes.promotor_index_path(@socket, :index) %>
 <% end %>
+
+<h1>Lista de Promotores</h1>
 <span><%= live_patch "Agregar Promotor", to: Routes.promotor_index_path(@socket, :new) %></span>
 
-<table>
+<table class="table table-sm">
   <thead>
     <tr>
       <th>CLAVE</th>

@@ -17,7 +17,9 @@ defmodule TlakauakWeb.LiveHelpers do
   """
   def live_modal(socket, component, opts) do
     path = Keyword.fetch!(opts, :return_to)
-    modal_opts = [id: :modal, return_to: path, component: component, opts: opts]
+    title = Keyword.fetch!(opts, :title)
+    modal_opts = [id: :modal, return_to: path, component: component, title: title, opts: opts]
+    # modal_opts |> IO.inspect(label: "modal_opts")
     live_component(socket, TlakauakWeb.ModalComponent, modal_opts)
   end
 

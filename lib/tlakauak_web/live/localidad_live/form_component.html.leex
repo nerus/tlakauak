@@ -1,23 +1,23 @@
-<h2><%= @title %></h2>
-
 <%= f = form_for @changeset, "#",
   id: "localidad-form",
   phx_target: @myself,
   phx_change: "validate",
   phx_submit: "save" %>
-<div>
-  <%= label f, :clave %>
-  <%= text_input f, :clave %>
-  <%= error_tag f, :clave %>
+  <div class="modal-body">
 
-  <%= label f, :descripcion %>
-  <%= text_input f, :descripcion %>
-  <%= error_tag f, :descripcion %>
+    <%= input f, :clave %>    
+    <%= input f, :descripcion %>    
 
-  <%= label f, :inactivo %>
-  <%= checkbox f, :inactivo %>
-  <%= error_tag f, :inactivo %>
-</div>
-
-  <%= submit "Guardar", phx_disable_with: "Guardando..." %>
+    <div class="input-group input-group-sm mb-3">
+      <div class="form-check form-switch">
+        <%= checkbox f, :inactivo, class: "form-check-input" %>
+        <%= label f, :inactivo, class: "form-check-label" %>
+        <%= error_tag f, :inactivo %>  
+      </div>
+    </div> 
+  </div>
+  <div class="modal-footer">
+    <%= live_redirect "Cancelar", to: @return_to, class: "btn btn-secondary" %>
+    <%= submit "Guardar", phx_disable_with: "Guardando...", class: "btn btn-primary" %>
+  </div>
 </form>

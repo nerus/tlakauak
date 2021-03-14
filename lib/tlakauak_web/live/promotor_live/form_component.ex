@@ -10,18 +10,19 @@ defmodule TlakauakWeb.PromotorLive.FormComponent do
     
     # coordinadores = Abm_Coordinador.list_coordinadores()
     # |> list_coordinadores()
-    # assigns |> IO.inspect(label: "update_FormComponent")
+    #  assigns |> IO.inspect(label: "update_FormComponent")
 
     {:ok,
      socket
      |> assign(assigns)
      |> assign(:coordinadores, Abm_Coordinador.list_coordinadores())
      |> assign(:changeset, changeset)}
+     |> IO.inspect(label: "update_FormComponent")
   end
 
   @impl true
   def handle_event("validate", %{"promotor" => promotor_params}, socket) do
-    promotor_params |>IO.inspect(label: "validate")
+    # promotor_params |>IO.inspect(label: "validate")
 
     changeset =
       socket.assigns.promotor
@@ -61,8 +62,4 @@ defmodule TlakauakWeb.PromotorLive.FormComponent do
     end
   end
 
-  defp list_coordinadores(coordinadores) do
-    coordinadores
-    |> Enum.map(fn x -> &{&1.descripcion, &1.id} end)
-  end
 end

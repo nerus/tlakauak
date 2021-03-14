@@ -1,4 +1,4 @@
-<h2><%= @title %></h2>
+
 
 <%= f = form_for @changeset, "#",
   id: "promotor-form",
@@ -6,28 +6,38 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <div>
 
-  <%= label f, :clave %>
-  <%= text_input f, :clave %>
-  <%= error_tag f, :clave %>
-
-  <%= label f, :descripcion %>
-  <%= text_input f, :descripcion %>
-  <%= error_tag f, :descripcion %>
-
-  <%= label f, "Coordinador" %>
-  <%= if @promotor.coordinador_id do %>
-  <%=  select(f, :coordinador_id, Enum.map(@coordinadores, &{&1.descripcion, &1.id}), prompt: "Selecciona un Coordinador", selected: @promotor.coordinador_id) %>
-  <% else %>
-  <%=  select(f, :coordinador_id, Enum.map(@coordinadores, &{&1.descripcion, &1.id}), prompt: "Selecciona un Coordinador") %>
-  <% end %>
-  <%= error_tag f, :coordinador_id %>
-
-  <%= label f, :inactivo %>
-  <%= checkbox f, :inactivo %>
-  <%= error_tag f, :inactivo %>
-
+  <div class="modal-body">
+  <div class="input-group input-group-sm mb-3">
+    <%= label f, :clave, class: "input-group-text" %>
+    <%= text_input f, :clave, class: "form-control" %>
+    <%= error_tag f, :clave %>
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <%= label f, :descripcion, class: "input-group-text" %>
+    <%= text_input f, :descripcion, class: "form-control" %>
+    <%= error_tag f, :descripcion %>
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <%= label f, "Coordinador", class: "input-group-text" %>
+    <%= if @promotor.coordinador_id do %>
+    <%=  select(f, :coordinador_id, Enum.map(@coordinadores, &{&1.descripcion, &1.id}), prompt: "Selecciona un Coordinador", selected: @promotor.coordinador_id, class: "form-select" ) %>
+    <% else %>
+    <%=  select(f, :coordinador_id, Enum.map(@coordinadores, &{&1.descripcion, &1.id}), prompt: "Selecciona un Coordinador", class: "form-select") %>
+    <% end %>
+    <%= error_tag f, :coordinador_id %>
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <div class="form-check form-switch">
+      <%= checkbox f, :inactivo, class: "form-check-input" %>
+      <%= label f, :inactivo, class: "form-check-label" %>
+      <%= error_tag f, :inactivo %>  
+    </div>
+  </div> 
 </div>
-  <%= submit "Guardar", phx_disable_with: "Guardando..." %>
+<div class="modal-footer">
+  <%= live_redirect "Cancelar", to: @return_to, class: "btn btn-secondary" %>
+  <%= submit "Guardar", phx_disable_with: "Guardando...", class: "btn btn-primary" %>
+</div>
+  
 </form>

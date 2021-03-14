@@ -1,14 +1,13 @@
-<section class="phx-hero">
-  <h1><%= gettext "Bienvenido a %{name}!", name: "Registro" %></h1>
-  <p>Elige una opcion</p>
-
-  <ul>
-  <li><%= live_patch "Lista de Promovidos", to: Routes.promovido_index_path(@socket, :index) %></li>
-  <li><%= live_patch "Lista de Localidades", to: Routes.localidad_index_path(@socket, :index) %></li>
-  <li><%= live_patch "Lista de Colonias", to: Routes.colonia_index_path(@socket, :index) %></li>
-  <li><%= live_patch "Lista de Coordinadores", to: Routes.coordinador_index_path(@socket, :index) %></li>
-  <li><%= live_patch "Lista de Promotores", to: Routes.promotor_index_path(@socket, :index) %></li>
-</ul>
-
-</section>
+<div class="card align-content-lg-center">
+  <div class="card-header">
+    <h1><%= gettext "Bienvenido a %{name}!", name: "Registro" %></h1>
+  </div>
+  <ul class="list-group list-group-flush">
+    <%= live_patch "Lista de Promovidos", to: Routes.promovido_index_path(@socket, :index), class: "list-group-item" %>
+    <%= live_patch "Lista de Localidades", to: Routes.localidad_index_path(@socket, :index), class: "list-group-item" %>
+    <%= live_patch "Lista de Colonias", to: Routes.colonia_index_path(@socket, :index), class: "list-group-item" %>
+    <%= live_patch "Lista de Coordinadores", to: Routes.coordinador_index_path(@socket, :index), class: "list-group-item" %>
+    <%= live_patch "Lista de Promotores", to: Routes.promotor_index_path(@socket, :index), class: "list-group-item" %>
+  </ul>
+</div>
 

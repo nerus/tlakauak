@@ -1,4 +1,3 @@
-<h1>Mostrar Localidad</h1>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, TlakauakWeb.LocalidadLive.FormComponent,
@@ -8,6 +7,7 @@
     localidad: @localidad,
     return_to: Routes.localidad_show_path(@socket, :show, @localidad) %>
 <% end %>
+<h1>Mostrar Localidad</h1>
 
 <ul>
 

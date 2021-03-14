@@ -1,4 +1,4 @@
-<h1>Lista de Colonias</h1>
+
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, TlakauakWeb.ColoniaLive.FormComponent,
@@ -8,9 +8,10 @@
     colonia: @colonia,
     return_to: Routes.colonia_index_path(@socket, :index) %>
 <% end %>
+<h1>Lista de Colonias</h1>
 <span><%= live_patch "Agregar Colonia", to: Routes.colonia_index_path(@socket, :new) %></span>
 
-<table>
+<table class="table table-sm">
   <thead>
     <tr>
       <th>Clave</th>

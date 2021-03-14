@@ -89,6 +89,7 @@ defmodule TlakauakWeb do
       import Phoenix.View
 
       import TlakauakWeb.ErrorHelpers
+      import TlakauakWeb.InputHelpers 
       import TlakauakWeb.Gettext
       alias TlakauakWeb.Router.Helpers, as: Routes
     end

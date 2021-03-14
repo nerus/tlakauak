@@ -1,4 +1,3 @@
-<h1>Mostrar Promovido</h1>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, TlakauakWeb.PromovidoLive.FormComponent,
@@ -8,6 +7,8 @@
     promovido: @promovido,
     return_to: Routes.promovido_show_path(@socket, :show, @promovido) %>
 <% end %>
+
+<h1>Mostrar Promovido</h1>
 
 <ul>
 
@@ -63,5 +64,5 @@
 
 </ul>
 
-<span><%= live_patch "Editar", to: Routes.promovido_show_path(@socket, :edit, @promovido), class: "button" %></span>
-<span><%= live_redirect "Regresar", to: Routes.promovido_index_path(@socket, :index) %></span>
+<span><%= live_patch "Editar", to: Routes.promovido_show_path(@socket, :edit, @promovido), class: "btn btn-success btn-sm" %></span>
+<span><%= live_redirect "Regresar", to: Routes.promovido_index_path(@socket, :index), class: "btn btn-secondary btn-sm" %></span>

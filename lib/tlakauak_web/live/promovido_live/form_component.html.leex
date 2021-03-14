@@ -1,66 +1,58 @@
-<h2><%= @title %></h2>
 
 <%= f = form_for @changeset, "#",
   id: "promovido-form",
   phx_target: @myself,
   phx_change: "validate",
   phx_submit: "save" %>
-<div>
-  <%= label f, "Clave Elector" %>
-  <%= text_input f, :clave %>
-  <%= error_tag f, :clave %>
+  <div class="modal-body">
 
-  <%= label f, "Nombre" %>
-  <%= text_input f, :descripcion %>
-  <%= error_tag f, :descripcion %>
+    <%= input f, :clave %>    
+    <%= input f, :descripcion %>  
+    <%= input f, :direccion %>  
+    <%= input f, :telefono %>  
+    <%= input f, :seccional %>  
+    <div class="input-group input-group-sm mb-3">
+      <%= label f, "Localidad/Ciudad", class: "input-group-text" %>
+      <%= if @promovido.localidad_id do %>
+      <%=  select(f, :localidad_id, Enum.map(@localidades, &{&1.descripcion, &1.id}), prompt: "Selecciona un localidad", selected: @promovido.localidad_id , class: "form-select" )%>
+      <% else %>
+      <%=  select(f, :localidad_id, Enum.map(@localidades, &{&1.descripcion, &1.id}), prompt: "Selecciona un localidad" , class: "form-select" ) %>
+      <% end %>
+      <%= error_tag f, :localidad_id %>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+      <%= label f, :colonia_id, class: "input-group-text" %>
+      <%= if @promovido.colonia_id do %>
+      <%=  select(f, :colonia_id, Enum.map(@colonias, &{&1.descripcion, &1.id}), prompt: "Selecciona un colonia", selected: @promovido.colonia_id , class: "form-select") %>
+      <% else %>
+      <%=  select(f, :colonia_id, Enum.map(@colonias, &{&1.descripcion, &1.id}), prompt: "Selecciona un colonia", class: "form-select") %>
+      <% end %>
+      <%= error_tag f, :colonia_id %>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+      <%= label f, :promotor_id, class: "input-group-text" %>
+      <%= if @promovido.promotor_id do %>
+      <%=  select(f, :promotor_id, Enum.map(@promotores, &{&1.descripcion, &1.id}), prompt: "Selecciona un promotor", selected: @promovido.promotor_id, class: "form-select") %>
+      <% else %>
+      <%=  select(f, :promotor_id, Enum.map(@promotores, &{&1.descripcion, &1.id}), prompt: "Selecciona un promotor", class: "form-select") %>
+      <% end %>
+      <%= error_tag f, :promotor_id %>
+    </div>
 
-  <%= label f, :direccion %>
-  <%= text_input f, :direccion %>
-  <%= error_tag f, :direccion %>
+    <div class="input-group input-group-sm mb-3">
+      <div class="form-check form-switch">
+        <%= checkbox f, :inactivo, class: "form-check-input" %>
+        <%= label f, :inactivo, class: "form-check-label" %>
+        <%= error_tag f, :inactivo %>  
+      </div>
+    </div> 
+  </div>
 
-  <%= label f, "Localidad/Ciudad" %>
-  <%= if @promovido.localidad_id do %>
-  <%=  select(f, :localidad_id, Enum.map(@localidades, &{&1.descripcion, &1.id}), prompt: "Selecciona un localidad", selected: @promovido.localidad_id) %>
-  <% else %>
-  <%=  select(f, :localidad_id, Enum.map(@localidades, &{&1.descripcion, &1.id}), prompt: "Selecciona un localidad") %>
-  <% end %>
-  <%= error_tag f, :localidad_id %>
-
-  <%= label f, :colonia_id %>
-  <%= if @promovido.colonia_id do %>
-  <%=  select(f, :colonia_id, Enum.map(@colonias, &{&1.descripcion, &1.id}), prompt: "Selecciona un colonia", selected: @promovido.colonia_id) %>
-  <% else %>
-  <%=  select(f, :colonia_id, Enum.map(@colonias, &{&1.descripcion, &1.id}), prompt: "Selecciona un colonia") %>
-  <% end %>
-  <%= error_tag f, :colonia_id %>
-
-  <%= label f, :telefono %>
-  <%= text_input f, :telefono %>
-  <%= error_tag f, :telefono %>
-
-  <%= label f, :seccional %>
-  <%= text_input f, :seccional %>
-  <%= error_tag f, :seccional %>
-
-  <!-- <%= #label f, :coordinador_id %>
-  <%= #number_input f, :coordinador_id %>
-  <%= #error_tag f, :coordinador_id %> -->
-
-  <%= label f, :promotor_id %>
-  <%= if @promovido.promotor_id do %>
-  <%=  select(f, :promotor_id, Enum.map(@promotores, &{&1.descripcion, &1.id}), prompt: "Selecciona un promotor", selected: @promovido.promotor_id) %>
-  <% else %>
-  <%=  select(f, :promotor_id, Enum.map(@promotores, &{&1.descripcion, &1.id}), prompt: "Selecciona un promotor") %>
-  <% end %>
-  <%= error_tag f, :promotor_id %>
+  <div class="modal-footer">
+    <%=# live_redirect "Cancelar", to: Routes.promovido_index_path(@socket, :index), class: "btn btn-secondary" %>
+    <%= live_redirect "Cancelar", to: @return_to, class: "btn btn-secondary" %>
+    <%= submit "Guardar", phx_disable_with: "Guardando...", disabled: !@changeset.valid?, class: "btn btn-primary" %>
+  </div>
 
 
-
-  <%= label f, :inactivo %>
-  <%= checkbox f, :inactivo %>
-  <%= error_tag f, :inactivo %>
-</div>
-  
-
-  <%= submit "Guardar", phx_disable_with: "Guardando..." %>
 </form>

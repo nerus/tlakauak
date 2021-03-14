@@ -1,5 +1,3 @@
-<h1>Mostrar Colonia</h1>
-
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, TlakauakWeb.ColoniaLive.FormComponent,
     id: @colonia.id,
@@ -8,6 +6,8 @@
     colonia: @colonia,
     return_to: Routes.colonia_show_path(@socket, :show, @colonia) %>
 <% end %>
+<h1>Mostrar Colonia</h1>
+
 
 <ul>
 
