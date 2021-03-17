@@ -1,10 +1,21 @@
-<ul class="dropdown-menu" aria-labelledby="dropdown01">
-<%= if @current_user do %>
-  <li><%= @current_user.email %></li>
-  <li><%= link "Perfil", to: Routes.user_settings_path(@conn, :edit), class: "dropdown-item"  %></li>
-  <li><%= link "Cerrar", to: Routes.user_session_path(@conn, :delete), class: "dropdown-item", method: :delete %></li>
-<% else %>
-  <li><%= link "Registrar", to: Routes.user_registration_path(@conn, :new), class: "dropdown-item" %></li>
-  <li><%= link "Iniciar", to: Routes.user_session_path(@conn, :new), class: "dropdown-item" %></li>
-<% end %>
-</ul>
+<li class="nav-item dropdown">
+  <%= if @current_user do %>
+  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><%= @current_user.email %></a>
+  <% else %>
+  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Iniciar</a>
+  <% end %>
+  <ul class="dropdown-menu" aria-labelledby="dropdown01">
+    <%= if @current_user do %>
+      <li><%= link "Perfil", to: Routes.user_settings_path(@conn, :edit), class: "dropdown-item"  %></li>
+      <li><%= link "Cerrar", to: Routes.user_session_path(@conn, :delete), class: "dropdown-item", method: :delete %></li>
+    <% else %>
+      <li><%= link "Registrar", to: Routes.user_registration_path(@conn, :new), class: "dropdown-item" %></li>
+      <li><%= link "Iniciar", to: Routes.user_session_path(@conn, :new), class: "dropdown-item" %></li>
+    <% end %>
+  </ul>
+</li>
+
+
+
+  
+

@@ -57,6 +57,15 @@ defmodule TlakauakWeb.Router do
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
+  end
+
+  scope "/", TlakauakWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    get "/users/settings", UserSettingsController, :edit
+    put "/users/settings", UserSettingsController, :update
+    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
 
     live "/promotores", PromotorLive.Index, :index
     live "/promotores/new", PromotorLive.Index, :new
@@ -92,15 +101,6 @@ defmodule TlakauakWeb.Router do
 
     live "/promovidos/:id", PromovidoLive.Show, :show
     live "/promovidos/:id/show/edit", PromovidoLive.Show, :edit
-  end
-
-  scope "/", TlakauakWeb do
-    pipe_through [:browser, :require_authenticated_user]
-
-    get "/users/settings", UserSettingsController, :edit
-    put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
-
 
 
   end
