@@ -22,6 +22,7 @@ defmodule Tlakauak.AbmPadron do
     |> preload(:promotor)
     |> preload(:colonia)
     |> preload(:localidad)
+    |> order_by([desc: :inserted_at])
     |> Repo.all()
     
   end

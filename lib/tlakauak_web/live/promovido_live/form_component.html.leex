@@ -9,7 +9,12 @@
     <%= input f, :clave %>    
     <%= input f, :descripcion %>  
     <%= input f, :direccion %>  
-    <%= input f, :telefono %>  
+    <!-- <%=# input f, :telefono %>   -->
+    <div class="input-group input-group-sm mb-3">
+      <%= label f, :telefono, class: "input-group-text" %>
+      <%= telephone_input f, :telefono, class: "form-control",  pattern: "[0-9]{10}" %>
+      <%= error_tag f, :telefono %>
+    </div>    
     <%= input f, :seccional %>  
     <div class="input-group input-group-sm mb-3">
       <%= label f, "Localidad/Ciudad", class: "input-group-text" %>
