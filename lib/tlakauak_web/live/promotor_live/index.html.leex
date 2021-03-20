@@ -16,6 +16,7 @@
     <tr>
       <th>CLAVE</th>
       <th>PROMOTOR</th>
+      <th>TELEFONO</th>
       <th>COORDINADOR</th>
       <th>INACTIVO?</th>
       <th></th>
@@ -26,6 +27,7 @@
       <tr id="promotor-<%= promotor.id %>">
         <td><%= promotor.clave %></td>
         <td><%= promotor.descripcion %></td>
+        <td><%= promotor.telefono %></td>
         <td>
           <%= if promotor.coordinador do %>
           <%= promotor.coordinador.descripcion %>

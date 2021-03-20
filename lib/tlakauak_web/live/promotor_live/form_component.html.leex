@@ -6,6 +6,8 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
+  <%= hidden_input f, :user_id %> 
+  <%= hidden_input f, :session_id %> 
 
   <div class="modal-body">
   <div class="input-group input-group-sm mb-3">
@@ -17,6 +19,11 @@
     <%= label f, :descripcion, class: "input-group-text" %>
     <%= text_input f, :descripcion, class: "form-control" %>
     <%= error_tag f, :descripcion %>
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <%= label f, :telefono, class: "input-group-text" %>
+    <%= telephone_input f, :telefono, class: "form-control" %>
+    <%= error_tag f, :telefono %>
   </div>
   <div class="input-group input-group-sm mb-3">
     <%= label f, "Coordinador", class: "input-group-text" %>

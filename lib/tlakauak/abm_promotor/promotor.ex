@@ -6,15 +6,18 @@ defmodule Tlakauak.Abm_Promotor.Promotor do
   schema "promotores" do
     field :clave, :string
     field :descripcion, :string
+    field :telefono, :string
     field :inactivo, :boolean, default: false
     timestamps()
     belongs_to :coordinador, Coordinador
+    field :session_id, :string
+    field :user_id, :integer
   end
 
   @doc false
   def changeset(promotor, attrs) do
     promotor
-    |> cast(attrs, [:clave, :descripcion, :coordinador_id, :inactivo])
+    |> cast(attrs, [:clave, :descripcion, :coordinador_id, :telefono, :inactivo, :user_id, :session_id])
     |> validate_required([:clave, :descripcion, :coordinador_id, :inactivo])
     |> unique_constraint(:clave)
   end

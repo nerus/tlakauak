@@ -6,8 +6,13 @@ defmodule TlakauakWeb.PromotorLive.Index do
   alias Tlakauak.Abm_Coordinador
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :promotores, Abm_Promotor.list_promotores())}
+  def mount(_params, session, socket) do
+    user = Tlakauak.Accounts.get_user_by_session_token(session["user_token"]) 
+    {:ok, assign(socket, 
+    promotores: Abm_Promotor.list_promotores(),
+    session_id: session["live_socket_id"],
+    user_id: user.id,
+    )}
   end
 
   @impl true
@@ -24,7 +29,7 @@ defmodule TlakauakWeb.PromotorLive.Index do
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "Nuevo Promotor")
-    |> assign(:promotor, %Promotor{})
+    |> assign(:promotor, %Promotor{user_id: socket.assigns.user_id, session_id: socket.assigns.session_id})
   end
 
   defp apply_action(socket, :index, _params) do
