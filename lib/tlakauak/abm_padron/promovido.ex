@@ -22,12 +22,14 @@ defmodule Tlakauak.AbmPadron.Promovido do
     belongs_to :colonia, Colonia
     belongs_to :localidad, Localidad
     timestamps()
+    field :session_id, :string
+    field :user_id, :integer
   end
 
   @doc false
   def changeset(promovido, attrs) do
     promovido
-    |> cast(attrs, [:clave, :descripcion, :direccion, :telefono, :seccional, :promotor_id, :colonia_id, :localidad_id, :inactivo])
+    |> cast(attrs, [:clave, :descripcion, :direccion, :telefono, :seccional, :promotor_id, :colonia_id, :localidad_id, :inactivo, :user_id, :session_id])
     |> validate_required([:clave, :descripcion, :direccion, :telefono, :seccional, :promotor_id, :colonia_id, :localidad_id, :inactivo])
     |> unique_constraint(:clave)
   end

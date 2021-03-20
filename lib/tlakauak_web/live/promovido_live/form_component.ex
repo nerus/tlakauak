@@ -30,6 +30,7 @@ defmodule TlakauakWeb.PromovidoLive.FormComponent do
   end
 
   def handle_event("save", %{"promovido" => promovido_params}, socket) do
+    promovido_params |> IO.inspect(label: "handle_event save")
     save_promovido(socket, socket.assigns.action, promovido_params)
   end
 
