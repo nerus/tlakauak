@@ -7,7 +7,14 @@
 
     <%= input f, :clave %>    
     <%= input f, :descripcion %>    
-
+    <%= hidden_input f, :user_id %> 
+    <%= hidden_input f, :session_id %> 
+    <div class="input-group input-group-sm mb-3">
+      <%= label f, :telefono, class: "input-group-text" %>
+      <%= telephone_input f, :telefono, class: "form-control" %>
+      <%= error_tag f, :telefono %>
+    </div>
+    
     <div class="input-group input-group-sm mb-3">
       <div class="form-check form-switch">
         <%= checkbox f, :inactivo, class: "form-check-input" %>

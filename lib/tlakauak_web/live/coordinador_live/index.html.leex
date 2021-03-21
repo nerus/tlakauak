@@ -12,8 +12,9 @@
 <table class="table table-sm">
   <thead>
     <tr>
-      <th>Clave</th>
-      <th>Descripcion</th>
+      <th>CLAVE</th>
+      <th>DESCRIPCION</th>
+      <th>TELEFONO</th>
       <th>INACTIVO ?</th>
       <th></th>
     </tr>
@@ -23,6 +24,7 @@
       <tr id="coordinador-<%= coordinador.id %>">
         <td><%= coordinador.clave %></td>
         <td><%= coordinador.descripcion %></td>
+        <td><%= coordinador.telefono %></td>
         <td><%= boolean_to_string(coordinador.inactivo) %></td>
         <td>
           <span><%= live_redirect "Mostrar", to: Routes.coordinador_show_path(@socket, :show, coordinador) %></span>

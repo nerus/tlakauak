@@ -3,9 +3,14 @@ defmodule TlakauakWeb.PromovidoLive.Index do
 
   alias Tlakauak.AbmPadron
   alias Tlakauak.AbmPadron.Promovido
+  @promovido_results_topic "promovido_results"
 
   @impl true
   def mount(_params, session, socket) do
+    # if connected?(socket) do
+    #   Endpoint.subscribe(@promovido_results_topic) 
+    # end
+
     #session |> IO.inspect(label: "PromovidoLive.mount")
     user = Tlakauak.Accounts.get_user_by_session_token(session["user_token"]) 
     {:ok, assign(socket, 
@@ -50,10 +55,7 @@ defmodule TlakauakWeb.PromovidoLive.Index do
     promovido = AbmPadron.get_promovido!(id)
     {:ok, _} = AbmPadron.delete_promovido(promovido)
 
-    {:noreply, assign(socket, :promovidos, list_promovidos())}
+    {:noreply, assign(socket, :promovidos, AbmPadron.list_promovidos())}
   end
-
-  defp list_promovidos do
-    AbmPadron.list_promovidos()
-  end
+ 
 end
